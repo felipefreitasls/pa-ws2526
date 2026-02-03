@@ -47,5 +47,19 @@ def main():
         group_service_loss = []
         group_power = []
 
+        # iterat through runs and read start_time_index
+        for run_id in range(1,11):
+            run_name = f"run_{run_id:02d}"
+            run_path = f"{group}/{run_name}"
+
+            start_time_index = fn.read_metadata(
+                file_path,
+                run_path,
+                "analyse_start_time_index",
+            )
+            # skip run if start time index is missing
+            if start_time_index is None:
+                continue
+
 if __name__ == "__main__":
     main()
