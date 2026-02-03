@@ -18,8 +18,13 @@ def main():
     
     group_names = fn.generate_group_name(controllers, topologies, disruptions)
 
-    print(group_names[:5])
-    print("Total groups:", len(group_names))
-
+    # Groups assigned to matriculation number 2757500
+    considered_groups = [
+        "ARIMA_Decentral_BlockageCosine",
+        "ARIMA_Decentral_NoDisruption",
+        "DTW_Decentral_NoDisruption",
+        "PID_Decentral_BlockageConstant",
+    ]
+    
 if __name__ == "__main__":
     main()
