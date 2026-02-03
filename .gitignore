@@ -17,3 +17,14 @@
 
 !tests/
 !functions/
+
+!data/
+data/*
+!data/.gitkeep
+*.h5
+
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.bash_history
