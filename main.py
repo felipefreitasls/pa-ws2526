@@ -40,6 +40,12 @@ def main():
     for group in group_names:
         if group not in considered_groups:
             continue
+        
+        # read setpoint and prepare lists for processed values
+        setpoint = fn.read_metadata(file_path, group, "setpoint")
+
+        group_service_loss = []
+        group_power = []
 
 if __name__ == "__main__":
     main()
