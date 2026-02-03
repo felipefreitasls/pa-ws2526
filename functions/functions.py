@@ -9,7 +9,7 @@ from numpy.typing import NDArray
 from plotid.publish import publish
 from plotid.tagplot import tagplot
 
-
+# Generate HDF5 group names from controller, topology and disruption
 def generate_group_name(
     controller: Union[str, List[str]],
     topology: Union[str, List[str]],
@@ -34,9 +34,21 @@ def generate_group_name(
 
     return group_names            
 
-
+# Read metadata from HDF5 file, return None if not available
 def read_metadata(file: str, path: str, attr_key: str) -> Any:
-    pass
+    with h5.File(file, "r") as f:
+        # check if path and attribute exist
+        if path not in f:
+            print(f"Warning: HDF5 path '{path}' not found.")
+            return None
+
+        obj = f[path]
+
+        if attr_key not in obj.attrs:
+            print(f"Warning: Attribute '{attr_key}' not found at path '{path}'.")
+            return None
+        
+        return obj.attrs[attr_key]        
 
 
 def read_data(file: str, path: str) -> Optional[NDArray]:

@@ -5,6 +5,7 @@ from functions import functions as fn
 
 
 def main():
+    # path to HDF5 dataset (not tracked by git)
     file_path = "data/data_GdD_WiSe2526.h5"
 
     controllers = ["ARIMA", "DTW", "PID"]
@@ -18,13 +19,13 @@ def main():
     
     group_names = fn.generate_group_name(controllers, topologies, disruptions)
 
-    # Groups assigned to matriculation number 2757500
+    # groups assigned to matriculation number 2757500
     considered_groups = [
         "ARIMA_Decentral_BlockageCosine",
         "ARIMA_Decentral_NoDisruption",
         "DTW_Decentral_NoDisruption",
         "PID_Decentral_BlockageConstant",
     ]
-    
+
 if __name__ == "__main__":
     main()
