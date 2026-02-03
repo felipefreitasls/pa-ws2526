@@ -36,5 +36,10 @@ def main():
         ]
     )
     
+    # iterate over all groups and process only assigned ones
+    for group in group_names:
+        if group not in considered_groups:
+            continue
+
 if __name__ == "__main__":
     main()
