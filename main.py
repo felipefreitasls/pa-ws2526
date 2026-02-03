@@ -60,6 +60,16 @@ def main():
             # skip run if start time index is missing
             if start_time_index is None:
                 continue
+            
+            # read measurement data for current run
+            tank_1_pressure = fn.read_data(file_path, f"{run_path}/tank_1_pressure")
+            pump_1_power = fn.read_data(file_path, f"{run_path}/pump_1_power")
+            pump_2_power = fn.read_data(file_path, f"{run_path}/pump_2_power")
+            time = fn.read_data(file_path,f"{run_path}/time")
+            
+            # skip run if any required measurement is missing
+            if tank_1_pressure is None or pump_1_power is None or pump_2_power is None or time is None:
+                continue
 
 if __name__ == "__main__":
     main()
