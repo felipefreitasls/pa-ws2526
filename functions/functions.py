@@ -15,7 +15,24 @@ def generate_group_name(
     topology: Union[str, List[str]],
     disruption: Union[str, List[str]],
 ) -> List[str]:
-    pass
+
+    if isinstance(controller, str):
+        controller = [controller]
+
+    if isinstance(topology, str):
+        topology = [topology]
+    
+    if isinstance(disruption, str):
+        disruption = [disruption]
+
+    group_names = []
+
+    for c in controller:
+        for t in topology:
+            for d in disruption:
+                group_names.append(c + "_" + t + "_" + d)
+
+    return group_names            
 
 
 def read_metadata(file: str, path: str, attr_key: str) -> Any:
