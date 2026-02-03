@@ -50,9 +50,21 @@ def read_metadata(file: str, path: str, attr_key: str) -> Any:
         
         return obj.attrs[attr_key]        
 
-
+# Read dataset from HDF5 file, return None if path is invalid
 def read_data(file: str, path: str) -> Optional[NDArray]:
-    pass
+    with h5.File(file, "r") as f:
+        # check if path exists and points to a dataset
+        if path not in f:
+            print(f"Warning: dataset '{path}' not found.")
+            return None
+
+        obj = f[path]
+        
+        if isinstance(obj, h5.Group):
+            print(f"Warning: path '{path}' points to a group, not a dataset.")
+            return None
+
+        return obj[:]
 
 
 def cap_service_data(service_data: NDArray, setpoint: float) -> NDArray:
