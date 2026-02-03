@@ -27,5 +27,14 @@ def main():
         "PID_Decentral_BlockageConstant",
     ]
 
+    processed_data = pd.DataFrame(
+        columns=[
+            "power_mean",
+            "power_std",
+            "service_loss_mean",
+            "service_loss_std",
+        ]
+    )
+    
 if __name__ == "__main__":
     main()
