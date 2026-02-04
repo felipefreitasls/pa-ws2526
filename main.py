@@ -87,5 +87,9 @@ def main():
             if service_fill_integral is None:
                 continue
             
+            # integrate reference signal based on setpoint
+            service_target = np.full_like(service_fill_slice, setpoint)
+            service_target_integral = fn.integral_with_time_step(service_target, time_slice)
+
 if __name__ == "__main__":
     main()
