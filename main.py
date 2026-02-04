@@ -71,5 +71,12 @@ def main():
             if tank_1_pressure is None or pump_1_power is None or pump_2_power is None or time is None:
                 continue
 
+            # cap service data using setpoint
+            service_fill = fn.cap_service_data(tank_1_pressure, setpoint)
+
+            # check pump power signals for negative values
+            if not fn.check_negative_values(pump_1_power) or not fn.check_negative_values(pump_2_power):
+                print(f"Warning: negative pump power values in {run_path}")    
+                
 if __name__ == "__main__":
     main()
