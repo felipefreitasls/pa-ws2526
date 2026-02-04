@@ -105,9 +105,10 @@ def calculate_service_loss(service_fill: float, service_target: float) -> float:
     service_loss = 100 * (1 - service_fill / service_target)
     return service_loss
 
-
+# Convert energy from watt-seconds to watt-hours
 def convert_Ws_to_Wh(energy_in_Ws: float) -> float:
-    pass
+    energy_in_Wh = energy_in_Ws / 3600
+    return energy_in_Wh
 
 
 def calculate_mean_and_std(data: List[float]) -> Tuple[float, float]:
