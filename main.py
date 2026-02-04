@@ -110,5 +110,9 @@ def main():
             total_energy_ws = energy_pump_1 + energy_pump_2
             total_energy_wh = fn.convert_Ws_to_Wh(total_energy_ws)
             
+            # store service loss and energy consumption
+            groups_service_loss.append(service_loss_percent)
+            groups_power.append(total_energy_wh)
+            
 if __name__ == "__main__":
     main()
