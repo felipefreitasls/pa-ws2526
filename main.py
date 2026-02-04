@@ -90,6 +90,12 @@ def main():
             # integrate reference signal based on setpoint
             service_target = np.full_like(service_fill_slice, setpoint)
             service_target_integral = fn.integral_with_time_step(service_target, time_slice)
-
+            
+            # calculate service loss percentage
+            service_loss_percent = fn.calculate_service_loss(
+                service_fill_integral,
+                service_target_integral,
+            )
+            
 if __name__ == "__main__":
     main()
