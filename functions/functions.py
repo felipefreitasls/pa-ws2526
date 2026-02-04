@@ -87,10 +87,18 @@ def check_negative_values(array: NDArray) -> bool:
             return False
     return True
 
-
+# Trapezoidal integral for time series data
 def integral_with_time_step(data: NDArray, time_steps: NDArray) -> float:
-    pass
+    if len(data) != len(time_steps):
+        print("Warning: data and time_steps must have the same length")
+        return None
 
+    integral = 0.0
+    for i in range(len(data)-1):
+        dt = time_steps[i + 1] - time_steps[i]
+        integral += (data[i] + data[i + 1]) / 2 * dt
+    
+    return float(integral)
 
 def calculate_service_loss(service_fill: float, service_target: float) -> float:
     pass
