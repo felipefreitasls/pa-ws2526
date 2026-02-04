@@ -117,6 +117,12 @@ def main():
         # calculate mean and std for service loss and energy
         service_loss_mean, service_loss_std = fn.calculate_mean_and_std(groups_service_loss)
         power_mean, power_std = fn.calculate_mean_and_std(groups_power)
-            
+
+        # store aggregated results in processed_data
+        processed_data.loc[group, "service_loss_mean"] = service_loss_mean
+        processed_data.loc[group, "service_loss_std"] = service_loss_std
+        processed_data.loc[group, "power_mean"] = power_mean
+        processed_data.loc[group, "power_std"] = power_std
+          
 if __name__ == "__main__":
     main()
