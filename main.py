@@ -5,8 +5,10 @@ from functions import functions as fn
 
 
 def main():
-    # path to HDF5 dataset (not tracked by git)
+    # path to HDF5 dataset
     file_path = "data/data_GdD_WiSe2526.h5"
+    # path to processed data archive
+    data_archive_path = "data/data_GdD_plot_data_WiSe2526.h5"
 
     controllers = ["ARIMA", "DTW", "PID"]
     topologies = ["Coupled", "Decentral", "Central"]
