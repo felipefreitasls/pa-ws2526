@@ -100,8 +100,10 @@ def integral_with_time_step(data: NDArray, time_steps: NDArray) -> float:
     
     return float(integral)
 
+# Calculate service loss in percent
 def calculate_service_loss(service_fill: float, service_target: float) -> float:
-    pass
+    service_loss = 100 * (1 - service_fill / service_target)
+    return service_loss
 
 
 def convert_Ws_to_Wh(energy_in_Ws: float) -> float:
