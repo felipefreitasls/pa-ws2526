@@ -59,16 +59,26 @@ def read_data(file: str, path: str) -> Optional[NDArray]:
             return None
 
         obj = f[path]
-        
+
         if isinstance(obj, h5.Group):
             print(f"Warning: path '{path}' points to a group, not a dataset.")
             return None
 
         return obj[:]
 
-
+# Cap service data to range [0, setpoint]
 def cap_service_data(service_data: NDArray, setpoint: float) -> NDArray:
-    pass
+    capped_data = []
+
+    for value in service_data:
+        if value > setpoint:
+            capped_data.append(setpoint)
+        elif value < 0:
+            capped_data.append(0)
+        else:
+            capped_data.append(value)
+
+    return np.array(capped_data)           
 
 
 def check_negative_values(array: NDArray) -> bool:
