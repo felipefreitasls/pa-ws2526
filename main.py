@@ -44,8 +44,8 @@ def main():
         # read setpoint and prepare lists for processed values
         setpoint = fn.read_metadata(file_path, group, "setpoint")
 
-        group_service_loss = []
-        group_power = []
+        groups_service_loss = []
+        groups_power = []
 
         # iterat through runs and read start_time_index
         for run_id in range(1,11):
@@ -113,6 +113,10 @@ def main():
             # store service loss and energy consumption
             groups_service_loss.append(service_loss_percent)
             groups_power.append(total_energy_wh)
+    
+        # calculate mean and std for service loss and energy
+        service_loss_mean, service_loss_std = fn.calculate_mean_and_std(groups_service_loss)
+        power_mean, power_std = fn.calculate_mean_and_std(groups_power)
             
 if __name__ == "__main__":
     main()
