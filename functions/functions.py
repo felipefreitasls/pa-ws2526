@@ -80,9 +80,12 @@ def cap_service_data(service_data: NDArray, setpoint: float) -> NDArray:
 
     return np.array(capped_data)           
 
-
+# Check if array contains only non-negative values
 def check_negative_values(array: NDArray) -> bool:
-    pass
+    for value in array:
+        if value < 0:
+            return False
+    return True
 
 
 def integral_with_time_step(data: NDArray, time_steps: NDArray) -> float:
