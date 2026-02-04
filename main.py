@@ -97,5 +97,18 @@ def main():
                 service_target_integral,
             )
             
+            # integrate pump power signals and convert to Wh
+            pump_1_slice = pump_1_power[start_time_index:]
+            pump_2_slice = pump_2_power[start_time_index:]
+
+            energy_pump_1 = fn.integral_with_time_step(pump_1_slice, time_slice)
+            energy_pump_2 = fn.integral_with_time_step(pump_2_slice, time_slice)
+
+            if energy_pump_1 is None or energy_pump_2 is None:
+                continue
+            
+            total_energy_ws = energy_pump_1 + energy_pump_2
+            total_energy_wh = fn.convert_Ws_to_Wh(total_energy_ws)
+            
 if __name__ == "__main__":
     main()
