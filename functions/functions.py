@@ -110,9 +110,14 @@ def convert_Ws_to_Wh(energy_in_Ws: float) -> float:
     energy_in_Wh = energy_in_Ws / 3600
     return energy_in_Wh
 
-
+# Calculate mean and standard deviation of a data list
 def calculate_mean_and_std(data: List[float]) -> Tuple[float, float]:
-    pass
+    data_array = np.array(data)
+
+    mean = float(np.mean(data_array))
+    std = float(np.std(data_array))
+
+    return mean, std
 
 
 def save_dataframe_in_hdf5_with_metadata(
