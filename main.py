@@ -77,6 +77,15 @@ def main():
             # check pump power signals for negative values
             if not fn.check_negative_values(pump_1_power) or not fn.check_negative_values(pump_2_power):
                 print(f"Warning: negative pump power values in {run_path}")    
-                
+
+            # integrate service fill from analyse start index
+            service_fill_slice = service_fill[start_time_index:]
+            time_slice = time[start_time_index:]
+
+            service_fill_integral = fn.integral_with_time_step(service_fill_slice, time_slice)
+
+            if service_fill_integral is None:
+                continue
+            
 if __name__ == "__main__":
     main()
