@@ -35,7 +35,8 @@ def main():
             "power_std",
             "service_loss_mean",
             "service_loss_std",
-        ]
+        ],
+        dtype = float,
     )
     
     # iterate over all groups and process only assigned ones
