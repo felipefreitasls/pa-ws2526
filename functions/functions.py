@@ -136,12 +136,28 @@ def save_dataframe_in_hdf5_with_metadata(
         for key, value in metadata.items():
             group.attrs[key] = value
 
-
+# Read plot data and generate plot formatting information from metadata
 def read_plot_data(
     file_path: str, group_path: str
 ) -> Tuple[pd.DataFrame, Dict[str, Any]]:
-    pass
+    df = pd.read_hdf(file_path, key = group_path)
 
+    with h5.File(file_path, "r") as f:
+        group = f[group_path]
+        metadata = dict(group.attrs.items())
+
+    x_label = metadata["x_label"]
+    x_unit = metadata["x_unit"]
+    y_label = metadata["y_label"]
+    y_unit = metadata["y_unit"]
+
+    plot_format_data = {
+        "legend_title": metadata["legend_title"],
+        "x_label": f"{x_label} [{x_unit}]",
+        "y_label": f"{y_label} [{y_unit}]",
+    }
+    
+    return df, plot_format_data
 
 def plot_service_loss_vs_power(
     processed_data: pd.DataFrame, plot_format_data: Dict[str, str]
