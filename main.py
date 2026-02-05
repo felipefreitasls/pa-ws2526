@@ -126,6 +126,22 @@ def main():
         processed_data.loc[group, "service_loss_std"] = service_loss_std
         processed_data.loc[group, "power_mean"] = power_mean
         processed_data.loc[group, "power_std"] = power_std
-          
+
+    # save processed data for plotting
+    plot_metadata = {
+        "legend_title": "Group",
+        "x_lable": "Power consumption",
+        "x_unit": "Wh",
+        "y_lable": "Service loss",
+        "y_unit": "%",
+    }
+    
+    fn.save_dataframe_in_hdf5_with_metadata(
+        processed_data,
+        data_archive_path,
+        "plotdata",
+        plot_metadata,
+    )
+
 if __name__ == "__main__":
     main()
