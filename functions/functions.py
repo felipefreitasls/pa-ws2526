@@ -119,14 +119,22 @@ def calculate_mean_and_std(data: List[float]) -> Tuple[float, float]:
 
     return mean, std
 
-
+# Save processed dataframe to HDF5 and store metadata as group attributes
 def save_dataframe_in_hdf5_with_metadata(
     df: pd.DataFrame,
     hdf5_path: str,
     group_name: str,
     metadata: Dict[str, Any],
 ) -> None:
-    pass
+    # save dataframe using pandas
+    with pd.HDFStore(hdf5_path, mode = "a") as store:
+        store.put(group_name, df, format = "table", data_columns = True)
+
+    # save metadata as HDF5 group attributes
+    with h5.File(hdf5_path, "a") as f:
+        group = f.require_group(group_name)
+        for key, value in metadata.items():
+            group.attrs[key] = value
 
 
 def read_plot_data(
