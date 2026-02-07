@@ -163,9 +163,11 @@ def read_plot_data(
 def plot_service_loss_vs_power(
     processed_data: pd.DataFrame, plot_format_data: Dict[str, str]
 ) -> Figure:
-    fig, ax = plt.sublots()
+    fig, ax = plt.subplots()
 
     for label in processed_data.index:
+        label_str = str(label)
+
         service_loss_mean = processed_data.loc[label, "service_loss_mean"]
         service_loss_std = processed_data.loc[label, "service_loss_std"]
         power_mean = processed_data.loc[label, "power_mean"]
@@ -176,13 +178,13 @@ def plot_service_loss_vs_power(
             power_mean,
             xerr = service_loss_std,
             yerr = power_std,
-            label = label,
+            label = label_str,
             fmt = "o",
             capsize = 3,
         )
     ax.set_xlabel(plot_format_data["x_label"])
     ax.set_ylabel(plot_format_data["y_label"])
-    ax.legend(plot_format_data["legend_title"])
+    ax.legend(title = plot_format_data["legend_title"])
 
     # choose reasonable limits based on data
     x_min = float(processed_data["service_loss_mean"].min() - processed_data["service_loss_std"].max())
