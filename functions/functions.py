@@ -201,9 +201,10 @@ def plot_service_loss_vs_power(
 def publish_plot(
     fig: Figure, source_paths: Union[str, List[str]], destination_path: str
 ) -> None:   
-    tagged = tagplot(
+    tagged_fig = tagplot(
         fig,
+        "matplotlib",
         id_method = "time",
-        prefix = "GdD_WS_2526_2757500_"
+        prefix = "GdD_WS_2526_2757500_",
     )
     publish(tagged_fig, source_paths, destination_path)
