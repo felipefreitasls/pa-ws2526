@@ -50,7 +50,7 @@ def main():
         groups_service_loss = []
         groups_power = []
 
-        # iterat through runs and read start_time_index
+        # iterate through runs and read start_time_index
         for run_id in range(1,11):
             run_name = f"run_{run_id:02d}"
             run_path = f"{group}/{run_name}"
@@ -149,5 +149,17 @@ def main():
         "plotdata",
     )
     
+    # generate and publish service loss vs power plot
+    fig = fn.plot_service_loss_vs_power(plot_data, plot_format_data)
+
+    fn.publish_plot(
+        fig,
+        [
+            data_archive_path,
+            "functions/functions.py",
+            "main.py",
+        ],
+        "./plotid",
+    ) 
 if __name__ == "__main__":
     main()
