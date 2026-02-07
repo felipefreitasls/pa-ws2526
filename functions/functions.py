@@ -159,12 +159,43 @@ def read_plot_data(
     
     return df, plot_format_data
 
+# Plot power consumption vs service loss with error bars
 def plot_service_loss_vs_power(
     processed_data: pd.DataFrame, plot_format_data: Dict[str, str]
 ) -> Figure:
-    pass
+    fig, ax = plt.sublots()
 
+    for label in processed_data.index:
+        service_loss_mean = processed_data.loc[label, "service_loss_mean"]
+        service_loss_std = processed_data.loc[label, "service_loss_std"]
+        power_mean = processed_data.loc[label, "power_mean"]
+        power_std = processed_data.loc[label, "power_std"]
 
+        ax.errorbar(
+            service_loss_mean,
+            power_mean,
+            xerr = service_loss_std,
+            yerr = power_std,
+            label = label,
+            fmt = "o",
+            capsize = 3,
+        )
+    ax.set_xlabel(plot_format_data["x_label"])
+    ax.set_ylabel(plot_format_data["y_label"])
+    ax.legend(plot_format_data["legend_title"])
+
+    # choose reasonable limits based on data
+    x_min = float(processed_data["service_loss_mean"].min() - processed_data["service_loss_std"].max())
+    x_max = float(processed_data["service_loss_mean"].max() + processed_data["service_loss_std"].max())
+    y_min = float(processed_data["power_mean"].min() - processed_data["power_std"].max())
+    y_max = float(processed_data["power_mean"].max() + processed_data["power_std"].max())
+
+    ax.set_xlim(x_min, x_max)
+    ax.set_ylim(y_min, y_max)
+
+    return fig
+
+    
 def publish_plot(
     fig: Figure, source_paths: Union[str, List[str]], destination_path: str
 ) -> None:
