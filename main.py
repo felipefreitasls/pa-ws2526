@@ -130,9 +130,9 @@ def main():
     # save processed data for plotting
     plot_metadata = {
         "legend_title": "Group",
-        "x_lable": "Power consumption",
+        "x_label": "Power consumption",
         "x_unit": "Wh",
-        "y_lable": "Service loss",
+        "y_label": "Service loss",
         "y_unit": "%",
     }
     
@@ -142,6 +142,12 @@ def main():
         "plotdata",
         plot_metadata,
     )
-
+    
+    # read plot data and plot formatting information from HDF5
+    plot_data, plot_format_data = fn.read_plot_data(
+        data_archive_path,
+        "plotdata",
+    )
+    
 if __name__ == "__main__":
     main()
