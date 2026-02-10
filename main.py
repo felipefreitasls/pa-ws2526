@@ -8,7 +8,7 @@ def main():
     # path to HDF5 dataset
     file_path = "data/data_GdD_WiSe2526.h5"
     # path to processed data archive
-    data_archive_path = "data/data_GdD_plot_data_WiSe2526.h5"
+    data_archive_path = "data/data_GdD_plot_WiSe2526.h5"
 
     controllers = ["ARIMA", "DTW", "PID"]
     topologies = ["Coupled", "Decentral", "Central"]
@@ -110,12 +110,12 @@ def main():
             if energy_pump_1 is None or energy_pump_2 is None:
                 continue
             
-            total_energy_ws = energy_pump_1 + energy_pump_2
-            total_energy_wh = fn.convert_Ws_to_Wh(total_energy_ws)
+            total_energy_Ws = energy_pump_1 + energy_pump_2
+            total_energy_Wh = fn.convert_Ws_to_Wh(total_energy_Ws)
             
             # store service loss and energy consumption
             groups_service_loss.append(service_loss_percent)
-            groups_power.append(total_energy_wh)
+            groups_power.append(total_energy_Wh)
     
         # calculate mean and std for service loss and energy
         service_loss_mean, service_loss_std = fn.calculate_mean_and_std(groups_service_loss)
